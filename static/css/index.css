@@ -1,0 +1,48 @@
+/*
+首页
+*/
+div,ul,li,body{
+    padding: 0;
+    margin: 0;
+}
+li{
+    list-style: none;
+}
+.content{
+    text-align: center;
+}
+.content hr{
+    width: 90%;
+}
+.selectitem li{
+    display: inline-block;
+}
+
+/*
+列表
+*/
+table{
+    border-collapse: collapse;
+    width: 76%;
+    margin: 0 auto;
+}
+table,th,td{
+    border: 1px solid gainsboro;
+}
+
+/*
+添加
+*/
+.addInfo{
+    width: 20%;
+    margin: 0 auto;
+    height: 500px;
+    text-align: left;
+}
+
+.addInfo li{
+    line-height: 40px;
+}
+.addInfo li:last-child{
+    padding-left: 80px;
+}

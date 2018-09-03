@@ -1,0 +1,28 @@
+{% extends 'index.html' %}
+{% block title %}
+    添加相片
+{% endblock %}
+{% block content %}
+    <h3>添加相册信息</h3>
+    <script type="text/javascript">
+        function submitpic() {
+            var file = $("#filepic").val();
+            if(file == '' ){
+                alert("请选择图片");
+            }else {
+               $("#form33").submit();
+            }
+        }
+    </script>
+    <form id="form33" action="{% url 'submit' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <ul class="addInfo">
+            <li><label>标题:&nbsp;</label><input type="text" name="title"></li>
+            <li><label>图片:&nbsp;</label><input id="filepic" type="file" name="picture"></li>
+            <li>
+                <input type="button" value="添加" onclick="submitpic()">
+                <input type="reset" value="重置">
+            </li>
+        </ul>
+    </form>
+{% endblock %}

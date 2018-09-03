@@ -1,0 +1,11 @@
+{% extends 'index.html' %}
+{% block title %}
+    结果页面
+{% endblock %}
+{% block content %}
+    {% if resultValue == 0 %}
+        <h4>提交失败</h4>
+    {% elif resultValue == 1 %}
+        <h4>提交成功</h4>
+    {% endif %}
+{% endblock %}

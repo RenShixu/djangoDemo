@@ -1,0 +1,65 @@
+{% extends "index.html" %}
+{% load static from staticfiles %}
+{% block title %}
+    编辑页面
+{% endblock %}
+{% block content %}
+    <script type="text/javascript">
+        $(function () {
+            var pid = $("#pid").val();
+            $.ajax({
+                url:'{% url 'editajax' pid %}',
+                type:'get',
+                dataType:"json",
+                async:false,
+                success:function (res) {
+                    var list = res.data;
+                    var pic = list[0];
+                    $("#pictitle").val(pic.title);
+                    var imageUrl = {% static '' %}+pic.p_url;
+                    $("#image").attr("src",imageUrl);
+                }
+            })
+        })
+
+        //回显图片
+        function changImg(e) {
+            for (var i = 0; i < e.target.files.length; i++) {
+                var file = e.target.files.item(i);
+
+                //实例化FileReader API
+                var freader = new FileReader();
+                freader.readAsDataURL(file);
+                freader.onload = function(e) {
+                    $("#image").attr("src",e.target.result);
+                }
+            }
+        }
+
+        function submit1111() {
+            var file = $("#picfile").val();
+            if(file == '' ){
+                alert("请选择图片");
+            }else {
+               $("#form22").submit();
+            }
+
+        }
+    </script>
+    <h3>修改相册信息</h3>
+    <form id="form22" action="{% url 'edit' %}" method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        <input type="hidden" id="pid" name="pid" value="{{ pid }}">
+        <ul class="addInfo">
+            <li><label>标题:&nbsp;</label><input id="pictitle" type="text" name="title"></li>
+            <li><label>图片:&nbsp;</label><input id="picfile" type="file" name="picture" onchange="changImg(event)"></li>
+            <li>
+                <input id="button22" type="button" value="修改" onclick="submit1111()">
+                <input type="reset" value="重置">
+            </li>
+        </ul>
+    </form>
+    <div >
+        <img id="image" src="">
+    </div>
+{% endblock %}

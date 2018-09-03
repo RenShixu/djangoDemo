@@ -1,0 +1,37 @@
+{% extends 'index.html' %}
+{% load static from staticfiles %}
+{% block title %}
+    相册列表
+{% endblock %}
+{% block content %}
+    <h3>浏览相册图片信息</h3>
+    <div>
+        {% for index in pageRange %}
+            {% if index == pageNum %}
+                {{ pageNum }}
+            {% else %}
+                <a href="{% url 'pictures' index 10 %}">{{ index }}</a>
+            {% endif %}
+        {% endfor %}
+    </div>
+    <table >
+        <tr>
+            <th>ID号</th>
+            <th>标题</th>
+            <th>图片</th>
+            <th>时间</th>
+            <th>操作</th>
+        </tr>
+
+        {% for page in currentPlist %}
+            <tr>
+                <td>{{ page.id }}</td>
+                <td>{{ page.title }}</td>
+                <td><img src="{% static '' %}{{ page.thumb_p_url }}"></td>
+                <td>{{ page.addtime|date:"Y-m-d H:i:s" }}</td>
+                <td><a href="{% url 'editshow' page.id%}">编辑</a>&nbsp;<a href="{% url 'delete' page.id %}">删除</a></td>
+            </tr>
+        {% endfor %}
+
+    </table>
+{% endblock %}
